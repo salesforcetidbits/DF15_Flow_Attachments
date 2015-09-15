@@ -1,0 +1,49 @@
+<apex:page controller="InlineFlowAttachment" sidebar="false">  
+    <apex:sectionHeader title="Dreamforce 2015" subtitle="Upload Attachment from Flow"/>
+    
+    <div class="shrink">
+        <flow:interview name="attachmentFlow" interview="{!myflow}"></flow:interview>
+    </div>
+
+    <apex:form >
+        <apex:outputpanel rendered="{!if(varAttachmentParentId != '', true,false)}" styleClass="shrink">
+            <div class="shrink">
+                <apex:pageMessages />
+                
+                <apex:pageBlock title="Upload an Attachment">
+                
+                    <apex:pageBlockButtons >
+                        <apex:commandButton action="{!upload}" value="Save"/>
+                    </apex:pageBlockButtons>
+                    
+                    <apex:pageBlockSection showHeader="false" columns="2" id="block1">
+                    
+                        <apex:pageBlockSectionItem >
+                            <apex:outputLabel value="File Name" for="fileName"/>
+                            <apex:inputText value="{!attachment.name}" id="fileName"/>
+                        </apex:pageBlockSectionItem>
+                        
+                        <apex:pageBlockSectionItem >
+                            <apex:outputLabel value="File" for="file"/>
+                            <apex:inputFile value="{!attachment.body}" filename="{!attachment.name}" id="file"/>
+                        </apex:pageBlockSectionItem>
+                        
+                        <apex:pageBlockSectionItem >
+                            <apex:outputLabel value="Description" for="description"/>
+                            <apex:inputTextarea value="{!attachment.description}" id="description"/>
+                        </apex:pageBlockSectionItem>
+                        
+                    </apex:pageBlockSection>
+                    
+                </apex:pageBlock>
+            </div>
+        </apex:outputPanel>
+    </apex:form>
+    
+    <style> 
+        .shrink{
+            width:50%;
+            box-shadow: 10px 10px 5px #888888;
+        }
+    </style>
+</apex:page>

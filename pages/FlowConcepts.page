@@ -1,0 +1,137 @@
+<apex:page controller="FlowConcepts" sidebar="false">
+    <apex:sectionHeader title="Dreamforce 2015" subtitle="Advanced Flow Enhancements"/>
+
+    <apex:pagemessage severity="Info" title="Concept 1" strength="2">Variables can be set by the apex constructor for the page.</apex:pagemessage>
+    <apex:pagemessage severity="Info" title="Concept 2" strength="2">Flow variables can be accessed by the page at runtime.</apex:pagemessage>
+    <apex:pagemessage severity="Info" title="Concept 3" strength="2">A Flow's look can be tweaked with CSS on the page.</apex:pagemessage>
+    <apex:pagemessage severity="Info" title="Concept 4" strength="2">Javascript can be used to manipulate the flow.</apex:pagemessage>
+
+    <center>
+        <div class="outer shrink">
+            <flow:interview name="flow_1" interview="{!myflow}" ></flow:interview>
+        </div>
+    </center>
+
+    <div class="outer">
+        <center>
+            <div class="myContainer">
+                var1 = {!var1}
+            </div>
+        </center>
+    </div>
+
+    <style>
+        .myContainer{
+            border-style:solid;
+            border-radius:7px;
+            border-width:2px;
+            padding:10px;
+            margin:auto;
+            text-align:center;
+            width:5%;
+            box-shadow: 0px 0px 7px #888888;
+            display:inline;
+            margin-right:5px;
+        }        
+        .outer{
+            margin-top:50px;
+            margin-bottom:50px;
+        }
+        .shrink{
+            width:25%;
+            padding:0px 0px 0px 0px;
+            border-style:inset;
+            border-width:3px;
+            
+          -webkit-box-shadow:
+                    0px 0px 0px 2px rgba(0,0,0,0.6),
+                        0px 0px 0px 14px #fff,
+                        0px 0px 0px 18px rgba(0,0,0,0.2),
+                        6px 6px 8px 17px #555;
+             -moz-box-shadow:
+                    0px 0px 0px 2px rgba(0,0,0,0.6),
+                        0px 0px 0px 14px #fff,
+                        0px 0px 0px 18px rgba(0,0,0,0.2),
+                        6px 6px 8px 17px #555;
+                  box-shadow:
+                    0px 0px 0px 2px rgba(0,0,0,0.6),
+                        0px 0px 0px 14px #fff,
+                        0px 0px 0px 18px rgba(0,0,0,0.2),
+                        6px 6px 8px 17px #555;
+        }       
+        .myContainer:hover{            
+            box-shadow: 2px 2px 9px red;
+            padding:15px;
+            font-size:150%;
+            font-weight: bold;
+        }        
+        .myButton {
+            -moz-box-shadow:inset 0px 1px 0px 0px #bee2f9;
+            -webkit-box-shadow:inset 0px 1px 0px 0px #bee2f9;
+            box-shadow:inset 0px 1px 0px 0px #bee2f9;
+            background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #63b8ee), color-stop(1, #468ccf));
+            background:-moz-linear-gradient(top, #63b8ee 5%, #468ccf 100%);
+            background:-webkit-linear-gradient(top, #63b8ee 5%, #468ccf 100%);
+            background:-o-linear-gradient(top, #63b8ee 5%, #468ccf 100%);
+            background:-ms-linear-gradient(top, #63b8ee 5%, #468ccf 100%);
+            background:linear-gradient(to bottom, #63b8ee 5%, #468ccf 100%);
+            filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#63b8ee', endColorstr='#468ccf',GradientType=0);
+            background-color:#63b8ee;
+            -moz-border-radius:6px;
+            -webkit-border-radius:6px;
+            border-radius:6px;
+            border:1px solid #3866a3;
+            display:inline-block;
+            cursor:pointer;
+            color:#14396a;
+            font-family:arial;
+            font-size:15px;
+            font-weight:bold;
+            padding:6px 24px;
+            text-decoration:none;
+            text-shadow:0px 1px 0px #7cacde;
+        }
+        .myButton:hover {
+            background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #468ccf), color-stop(1, #63b8ee));
+            background:-moz-linear-gradient(top, #468ccf 5%, #63b8ee 100%);
+            background:-webkit-linear-gradient(top, #468ccf 5%, #63b8ee 100%);
+            background:-o-linear-gradient(top, #468ccf 5%, #63b8ee 100%);
+            background:-ms-linear-gradient(top, #468ccf 5%, #63b8ee 100%);
+            background:linear-gradient(to bottom, #468ccf 5%, #63b8ee 100%);
+            filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#468ccf', endColorstr='#63b8ee',GradientType=0);
+            background-color:#468ccf;
+        }
+        .myButton:active {
+            position:relative;
+            top:1px;
+        }
+        .brandQuaternaryFgr:hover{
+            color:#14396a;
+            font-family:arial;
+            font-size:15px;
+            font-weight:bold;
+            padding:6px 24px;
+            text-decoration:none;
+            text-shadow:0px 1px 0px #7cacde;
+        }  
+    </style>
+    
+    <script type="text/javascript">
+    
+        var nodeList = document.getElementsByClassName('btn FlowNextBtn');
+        var nodeArray = [].slice.call(nodeList);
+        
+        for(var i = 0; i < nodeArray.length; i++){
+            var newChild= document.createElement("input");
+            newChild.type = "button";
+            newChild.id= "btn"+i;
+            newChild.value = "Your Very Own Button";
+            newChild.className = nodeArray[i].className;
+            newChild.onclick = function(){alert('Var1 = ' + '{!var1}')};
+            nodeArray[i].parentNode.appendChild(newChild);
+        }
+        
+        document.getElementById('j_id0:j_id63:i:f:pb:pbb:next').className = 'myButton';     
+    </script>
+    
+</apex:page>

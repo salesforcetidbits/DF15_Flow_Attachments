@@ -1,0 +1,67 @@
+<apex:page controller="ModalFlowAttachment" sidebar="false">  
+    <apex:sectionHeader title="Dreamforce 2015" subtitle="Upload Attachment from Flow"/>
+
+    <div class="shrink">
+        <flow:interview name="attachmentFlow" interview="{!myflow}"></flow:interview>
+    </div>
+
+
+    <script type="text/javascript">
+
+        //Once user assigns a value to the varAttachmentParentId flow var
+        //the javascript knows it is time to add the upload attachment button to the DOM
+        if('{!varAttachmentParentId}' != ''){
+
+            var tmp = '{!varAttachmentParentId}';
+            var parentGuest = document.getElementById("j_id0:j_id3:i:f:pb:pbb:bottom:next");//TODO:get nodelist by classname so it is more resilient than by id
+            var childGuest = document.createElement("input");
+            childGuest.type = "button";
+            childGuest.id= "strunksButton";
+            childGuest.value = "Upload Attachment";
+            childGuest.className = "btn FlowNextBtn";
+            childGuest.onclick = function(){document.getElementById("tst").showModal();};
+            parentGuest.parentNode.appendChild(childGuest);
+        }
+        
+    </script>
+
+    <apex:form enctype="multipart/form-data">
+        <apex:outputpanel rendered="{!if(varAttachmentParentId != null, true,false)}" styleClass="shrink">      
+            <dialog id="tst">
+                <apex:pageMessages />
+                <apex:pageBlock title="Upload a Attachment">
+
+                    <apex:pageBlockButtons >
+                        <apex:commandButton action="{!upload}" value="Save"/>
+                    </apex:pageBlockButtons>
+
+                    <apex:pageBlockSection showHeader="false" columns="2" id="block1">
+
+                        <apex:pageBlockSectionItem >
+                            <apex:outputLabel value="File Name" for="fileName"/>
+                            <apex:inputText value="{!attachment.name}" id="fileName"/>
+                        </apex:pageBlockSectionItem>
+
+                        <apex:pageBlockSectionItem >
+                            <apex:outputLabel value="File" for="file"/>
+                            <apex:inputFile value="{!attachment.body}" filename="{!attachment.name}" id="file"/>
+                        </apex:pageBlockSectionItem>
+
+                        <apex:pageBlockSectionItem >
+                            <apex:outputLabel value="Description" for="description"/>
+                            <apex:inputTextarea value="{!attachment.description}" id="description"/>
+                        </apex:pageBlockSectionItem>
+
+                    </apex:pageBlockSection>
+                </apex:pageBlock>
+            </dialog>
+        </apex:outputPanel>
+
+    </apex:form>
+    <style>
+    .shrink{
+        width:50%;
+        box-shadow: 10px 10px 5px #888888;
+    }    
+    </style>
+</apex:page>
