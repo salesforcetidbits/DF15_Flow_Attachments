@@ -12,9 +12,17 @@ public with sharing class InlineFlowAttachment{
 
     public String getVarAttachmentParentId(){
 
+
+
         if(varAttachmentParentId == null){
             varAttachmentParentId = '';
             return varAttachmentParentId;
+        }
+
+        //Workaround for more info see
+        //http://salesforce.stackexchange.com/questions/562/test-class-for-visual-workflow
+        if(Test.isRunningTest()){
+            return [select id from case limit 1].id;
         }
 
         //requires attachmentFlow to have a variable named varAttachmentParentId
