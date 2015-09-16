@@ -1,0 +1,100 @@
+@isTest
+private class FlowAttachment_TEST {
+
+  @TestSetup
+  private static void setup(){
+
+    // will add attachments to this case
+    Insert new Case(
+      Origin = 'Phone',
+      Subject = 'DF15',
+      Description = 'was AWESOME',
+      Priority = 'High of course',
+      Status = 'Awesome'
+    );
+  }
+
+  static testMethod void InlineFlowAttachment_1() {
+
+    Test.setCurrentPage(Page.InlineFlowAttachment);
+    InlineFlowAttachment controller =
+      new InlineFlowAttachment();
+
+    controller.getVarAttachmentParentId();
+    Attachment tmpAttach = controller.attachment;
+
+    Attachment attachment = new Attachment();
+    attachment.Body = Blob.valueOf('Dreamforce15');
+    attachment.Name = String.valueOf('Coastal Cloud.txt');
+    attachment.ParentId = [select id from case limit 1].id;
+    controller.attachment = attachment;
+
+    controller.upload();
+
+  }
+
+  static testMethod void InlineFlowAttachment_2() {
+
+    Test.setCurrentPage(Page.InlineFlowAttachment);
+    InlineFlowAttachment controller =
+      new InlineFlowAttachment();
+
+    controller.getVarAttachmentParentId();
+    Attachment tmpAttach = controller.attachment;
+
+    Attachment attachment = new Attachment();
+    attachment.Body = Blob.valueOf('Dreamforce15');
+    attachment.Name = String.valueOf('Coastal Cloud.txt');
+    attachment.ParentId = [select id from case limit 1].id;
+    controller.attachment = attachment;
+    controller.varAttachmentParentId = 'not a valid ID';
+    controller.upload();
+  }
+
+  static testMethod void ModalFlowAttachment_1() {
+
+    Test.setCurrentPage(Page.ModalFlowAttachment);
+    ModalFlowAttachment controller =
+      new ModalFlowAttachment();
+
+    controller.getVarAttachmentParentId();
+    Attachment tmpAttach = controller.attachment;
+
+    Attachment attachment = new Attachment();
+    attachment.Body = Blob.valueOf('Dreamforce15');
+    attachment.Name = String.valueOf('Coastal Cloud.txt');
+    attachment.ParentId = [select id from case limit 1].id;
+    controller.attachment = attachment;
+
+    controller.upload();
+
+  }
+
+  static testMethod void ModalFlowAttachment_2() {
+
+    Test.setCurrentPage(Page.ModalFlowAttachment);
+    ModalFlowAttachment controller =
+      new ModalFlowAttachment();
+
+    controller.getVarAttachmentParentId();
+    Attachment tmpAttach = controller.attachment;
+
+    Attachment attachment = new Attachment();
+    attachment.Body = Blob.valueOf('Dreamforce15');
+    attachment.Name = String.valueOf('Coastal Cloud.txt');
+    attachment.ParentId = [select id from case limit 1].id;
+    controller.attachment = attachment;
+    controller.varAttachmentParentId = 'not a valid ID';
+    controller.upload();
+  }
+
+  static testMethod void FlowConcepts_1() {
+
+    Test.setCurrentPage(Page.FlowConcepts);
+    FlowConcepts controller =
+      new FlowConcepts();
+
+    controller.getvar1();
+  }
+
+}
