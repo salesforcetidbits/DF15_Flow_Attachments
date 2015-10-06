@@ -12,8 +12,6 @@ public with sharing class InlineFlowAttachment{
 
     public String getVarAttachmentParentId(){
 
-
-
         if(varAttachmentParentId == null){
             varAttachmentParentId = '';
             return varAttachmentParentId;
